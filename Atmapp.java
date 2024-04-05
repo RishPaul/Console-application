@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Atmapp {
-    private static HashMap<Integer,String> map = new HashMap<>();
+    public static HashMap<Integer,String> map = new HashMap<>();
 
     public static void main(String[] args) {
         ArrayList<UserDetails> list = new ArrayList<>();
@@ -61,17 +61,15 @@ public class Atmapp {
                     System.out.println("Enter Valid choice:");
                     continue; 
             }
-            
             System.out.println("Do you want to continue:y/n");
             c=sc.next().charAt(0);
         } while(c!='n');
     }
 
-    private static void withdrawal(int pin, ArrayList<UserDetails> list) {
+    public static void withdrawal(int pin, ArrayList<UserDetails> list) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter amount to be withdrawn:");
         int amount = sc.nextInt();
-        
         for(UserDetails user : list) {
             if(user.act_no.equals(map.get(pin))) {
                 if(amount > user.balance) {
@@ -86,32 +84,29 @@ public class Atmapp {
         System.out.println("User not found!");
     }
 
-    private static void deposit(int pin, ArrayList<UserDetails> list, Scanner sc) {
+    public static void deposit(int pin, ArrayList<UserDetails> list, Scanner sc) {
         System.out.println("Enter amount to be deposited:");
         int amount = sc.nextInt();
-        
-        for(UserDetails user : list) {
+        for(UserDetails user:list) {
             if(user.act_no.equals(map.get(pin))) {
                 user.balance += amount;
                 System.out.println("Amount deposited successfully. Updated balance: " + user.balance);
-                return;
             }
         }
-        System.out.println("User not found!");
+       
     }
 
     
-    private static void balanceCheck(int pin, ArrayList<UserDetails> list) {
-        for(UserDetails user : list) {
+    public static void balanceCheck(int pin, ArrayList<UserDetails> list) {
+        for(UserDetails user:list) {
             if(user.act_no.equals(map.get(pin))) {
                 System.out.println("Balance available: " + user.balance);
-                return;
             }
         }
-        System.out.println("User not found!");
+       
     }
 
-    private static void adminAccess(ArrayList<UserDetails> list) {
+    public static void adminAccess(ArrayList<UserDetails> list) {
         System.out.println("--- Admin Access ---");
         for (UserDetails user : list) {
             System.out.println("Account Number: " + user.act_no);
@@ -121,11 +116,11 @@ public class Atmapp {
             System.out.println("-------------------");
         }
         
-        int totalBalance = 0;
+        int totalbal = 0;
         for (UserDetails user : list) {
-            totalBalance += user.balance;
+            totalbal += user.balance;
         }
-        System.out.println("Total Balance in Bank: " + totalBalance);
+        System.out.println("Total Balance in Bank: " + totalbal);
     }
 }
 
